@@ -1,0 +1,14 @@
+#!/bin/bash
+# Install Docker
+sudo apt update -y
+sudo apt install docker.io -y
+systemctl enable docker
+systemctl start docker
+
+# Authenticate Docker with Artifact Registry
+gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
+
+# Pull and run PHP application container
+docker run -d --name php-app -p 80:80 --restart unless-stopped us-central1-docker.pkg.dev/siva-477505/php-app/php-app:v1
+
+echo "PHP application deployed successfully"
