@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "pavan-gcs"
+    bucket = "subhash-gcs"
     prefix = "terraform"
   }
 }
