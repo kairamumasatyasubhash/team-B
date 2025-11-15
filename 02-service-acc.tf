@@ -1,5 +1,5 @@
 # Service account for VMs
-resource "google_service_account" "instance_sa" {
+resource "google_service_account" "subhash" {
   account_id   = "php-instance"
   display_name = "Instance SA for pulling GAR images"
 }
@@ -8,48 +8,48 @@ resource "google_service_account" "instance_sa" {
 resource "google_project_iam_member" "artifact_reader" {
   project = var.project
   role    = "roles/artifactregistry.reader"
-  member  = "serviceAccount:${google_service_account.instance_sa.email}"
+  member  = "serviceAccount:${google_service_account.subhash.email}"
 }
 
 resource "google_project_iam_member" "os_login" {
   project = var.project
   role    = "roles/compute.osLogin"
-  member  = "serviceAccount:${google_service_account.instance_sa.email}"
+  member  = "serviceAccount:${google_service_account.subhash.email}"
 }
 
 resource "google_project_iam_member" "instance_sa_compute_admin" {
   project = var.project
   role    = "roles/compute.instanceAdmin.v1"
-  member  = "serviceAccount:${google_service_account.instance_sa.email}"
+  member  = "serviceAccount:${google_service_account.subhash.email}"
 }
 # Add this to your Terraform configuration
 resource "google_storage_bucket_iam_member" "instance_sa_bucket_access" {
   bucket = "pavan-gcs"
   role   = "roles/storage.objectAdmin"
-  member = "serviceAccount:${google_service_account.instance_sa.email}"
+  member = "serviceAccount:${google_service_account.subhash.email}"
 }
 
 resource "google_project_iam_member" "instance_sa_service_account_user" {
   project = var.project
   role    = "roles/iam.serviceAccountUser"
-  member  = "serviceAccount:${google_service_account.instance_sa.email}"
+  member  = "serviceAccount:${google_service_account.subhash.email}"
 }
 
 resource "google_project_iam_member" "instance_sa_compute_viewer" {
   project = var.project
   role    = "roles/compute.viewer"
-  member  = "serviceAccount:${google_service_account.instance_sa.email}"
+  member  = "serviceAccount:${google_service_account.subhash.email}"
 }
 
 # ADD THESE STORAGE ROLES:
 resource "google_project_iam_member" "instance_sa_storage_object_admin" {
   project = var.project
   role    = "roles/storage.objectAdmin"
-  member  = "serviceAccount:${google_service_account.instance_sa.email}"
+  member  = "serviceAccount:${google_service_account.subhash.email}"
 }
 
 resource "google_project_iam_member" "instance_sa_storage_viewer" {
   project = var.project
   role    = "roles/storage.objectViewer"
-  member  = "serviceAccount:${google_service_account.instance_sa.email}"
+  member  = "serviceAccount:${google_service_account.subhash.email}"
 }
