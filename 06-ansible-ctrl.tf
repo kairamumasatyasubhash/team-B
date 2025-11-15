@@ -1,5 +1,5 @@
 # Ansible Master Node
-resource "google_compute_instance" "ansible_master" {
+resource "google_compute_instance" "annsible" {
   name         = "ansible-master"
   machine_type = "e2-small"
   zone         = "${var.region}-a"
