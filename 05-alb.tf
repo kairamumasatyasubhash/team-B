@@ -1,6 +1,6 @@
 #backend
-resource "google_compute_backend_service" "php_backend" {
-  name            = "php-backend"
+resource "google_compute_backend_service" "php" {
+  name            = "php--backend"
   load_balancing_scheme = "EXTERNAL"
   protocol        = "HTTP"
 
@@ -18,7 +18,7 @@ resource "google_compute_backend_service" "php_backend" {
 #url map
 resource "google_compute_url_map" "php_url_map" {
   name            = "php-url-map"
-  default_service = google_compute_backend_service.php_backend.id
+  default_service = google_compute_backend_service.php.id
 }
 
 #http proxy
